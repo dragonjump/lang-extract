@@ -1,0 +1,225 @@
+<style>
+.lx-highlight { position: relative; border-radius:3px; padding:1px 2px;}
+.lx-highlight .lx-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  background: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 4px;
+  padding: 6px 8px;
+  position: absolute;
+  z-index: 1000;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  max-width: 240px;
+  white-space: normal;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.lx-highlight:hover .lx-tooltip { visibility: visible; opacity:1; }
+.lx-animated-wrapper { max-width: 100%; font-family: Arial, sans-serif; }
+.lx-controls {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 8px;
+  padding: 12px; margin-bottom: 16px;
+}
+.lx-button-row {
+  display: flex; justify-content: center; gap: 8px; margin-bottom: 12px;
+}
+.lx-control-btn {
+  background: #4285f4; color: white; border: none; border-radius: 4px;
+  padding: 8px 16px; cursor: pointer; font-size: 13px; font-weight: 500;
+  transition: background-color 0.2s;
+}
+.lx-control-btn:hover { background: #3367d6; }
+.lx-progress-container {
+  margin-bottom: 8px;
+}
+.lx-progress-slider {
+  width: 100%; margin: 0; appearance: none; height: 6px;
+  background: #ddd; border-radius: 3px; outline: none;
+}
+.lx-progress-slider::-webkit-slider-thumb {
+  appearance: none; width: 18px; height: 18px; background: #4285f4;
+  border-radius: 50%; cursor: pointer;
+}
+.lx-progress-slider::-moz-range-thumb {
+  width: 18px; height: 18px; background: #4285f4; border-radius: 50%;
+  cursor: pointer; border: none;
+}
+.lx-status-text {
+  text-align: center; font-size: 12px; color: #666; margin-top: 4px;
+}
+.lx-text-window {
+  font-family: monospace; white-space: pre-wrap; border: 1px solid #90caf9;
+  padding: 12px; max-height: 260px; overflow-y: auto; margin-bottom: 12px;
+  line-height: 1.6;
+}
+.lx-attributes-panel {
+  background: #fafafa; border: 1px solid #90caf9; border-radius: 6px;
+  padding: 8px 10px; margin-top: 8px; font-size: 13px;
+}
+.lx-current-highlight {
+  border-bottom: 4px solid #ff4444;
+  font-weight: bold;
+  animation: lx-pulse 1s ease-in-out;
+}
+@keyframes lx-pulse {
+  0% { text-decoration-color: #ff4444; }
+  50% { text-decoration-color: #ff0000; }
+  100% { text-decoration-color: #ff4444; }
+}
+.lx-legend {
+  font-size: 12px; margin-bottom: 8px;
+  padding-bottom: 8px; border-bottom: 1px solid #e0e0e0;
+}
+.lx-label {
+  display: inline-block;
+  padding: 2px 4px;
+  border-radius: 3px;
+  margin-right: 4px;
+  color: #000;
+}
+.lx-attr-key {
+  font-weight: 600;
+  color: #1565c0;
+  letter-spacing: 0.3px;
+}
+.lx-attr-value {
+  font-weight: 400;
+  opacity: 0.85;
+  letter-spacing: 0.2px;
+}
+
+/* Add optimizations with larger fonts and better readability for GIFs */
+.lx-gif-optimized .lx-text-window { font-size: 16px; line-height: 1.8; }
+.lx-gif-optimized .lx-attributes-panel { font-size: 15px; }
+.lx-gif-optimized .lx-current-highlight { text-decoration-thickness: 4px; }
+</style>
+    <div class="lx-animated-wrapper lx-gif-optimized">
+      <div class="lx-attributes-panel">
+        <div class="lx-legend">Highlights Legend: <span class="lx-label" style="background-color:#D2E3FC;">delay_reason</span> <span class="lx-label" style="background-color:#C8E6C9;">expected_arrival</span> <span class="lx-label" style="background-color:#FEF0C3;">payment_instructions</span> <span class="lx-label" style="background-color:#F9DEDC;">payment_method_inquiry</span> <span class="lx-label" style="background-color:#FFDDBE;">product_condition</span> <span class="lx-label" style="background-color:#EADDFF;">return_request</span> <span class="lx-label" style="background-color:#C4E9E4;">return_solution</span> <span class="lx-label" style="background-color:#FCE4EC;">shipping_issue</span></div>
+        <div id="attributesContainer"></div>
+      </div>
+      <div class="lx-text-window" id="textWindow">
+
+- C: “<span class="lx-highlight lx-current-highlight" data-idx="0" style="background-color:#F9DEDC;">Why was I charged twice this month</span>?” A: “<span class="lx-highlight" data-idx="1" style="background-color:#FEF0C3;">I see two pending authorizations; one will drop off within 24–48 hours</span>.”
+- C: “<span class="lx-highlight" data-idx="2" style="background-color:#F9DEDC;">My promo code didn’t apply</span>.” A: “<span class="lx-highlight" data-idx="3" style="background-color:#FEF0C3;">It expired yesterday, but I can honor a one-time adjustment now</span>.”
+- C: “<span class="lx-highlight" data-idx="4" style="background-color:#F9DEDC;">This foreign transaction fee surprised me</span>.” A: “<span class="lx-highlight" data-idx="5" style="background-color:#FEF0C3;">It’s your bank’s fee; I’ll send documentation to request a waiver</span>.”
+- C: “<span class="lx-highlight" data-idx="6" style="background-color:#FCE4EC;">Tracking hasn’t updated in three days</span>.” A: “<span class="lx-highlight" data-idx="7" style="background-color:#D2E3FC;">Carrier reports weather delays</span>; <span class="lx-highlight" data-idx="8" style="background-color:#C8E6C9;">arrival now expected Friday</span>.”
+- C: “<span class="lx-highlight" data-idx="9" style="background-color:#FCE4EC;">Package shows delivered, but I don’t have it</span>.” A: “It was left at Building B mailroom; I’ll share the photo.”
+- C: “<span class="lx-highlight" data-idx="10" style="background-color:#FCE4EC;">Can you reroute to my office</span>?” A: “<span class="lx-highlight" data-idx="11" style="background-color:#C4E9E4;">I submitted a hold-and-pickup request at your nearest hub</span>.”
+
+- C: “<span class="lx-highlight" data-idx="12" style="background-color:#EADDFF;">How do I return without the original box</span>?” A: “<span class="lx-highlight" data-idx="13" style="background-color:#C4E9E4;">Use our reusable mailer; I’ll email a QR code</span>.”
+- C: “<span class="lx-highlight" data-idx="14" style="background-color:#EADDFF;">Refund’s taking too long</span>.” A: “<span class="lx-highlight" data-idx="15" style="background-color:#D2E3FC;">It’s processed on our end; banks take 5–10 business days</span>.”
+- C: “<span class="lx-highlight" data-idx="16" style="background-color:#FFDDBE;">I received the wrong size</span>.” A: “<span class="lx-highlight" data-idx="17" style="background-color:#C4E9E4;">Exchange created; keep the original until the replacement arrives</span>.”
+- C: “<span class="lx-highlight" data-idx="18" style="background-color:#FFDDBE;">The app keeps freezing</span>.” A: “Update to v4.2.1; it fixes the memory leak causing freezes.”
+- C: “<span class="lx-highlight" data-idx="19" style="background-color:#FFDDBE;">My device won’t charge</span>.” A: “<span class="lx-highlight" data-idx="20" style="background-color:#C4E9E4;">Try a 30-second power reset and a different USB-C cable</span>.”
+- C: “<span class="lx-highlight" data-idx="21" style="background-color:#FFDDBE;">Audio is distorted on calls</span>.” A: “<span class="lx-highlight" data-idx="22" style="background-color:#C4E9E4;">Disable noise suppression once; if resolved, update your drivers</span>.”
+- C: “I’m locked out after two-factor.” A: “I’ll verify identity and reset your authenticator seeds.”
+- C: “Suspicious login alert?” A: “We blocked it from a new device; please rotate your password.”
+- C: “How do I add a backup email?” A: “Go to Profile &gt; Security &gt; Recovery and add it there.”
+- C: “Which plan fits a five-person team?” A: “The Pro plan with five seats and shared workspaces.”
+- C: “Is there an NGO discount?” A: “Yes, 30% off with your verification letter.”
+- C: “Can I lock pricing for two years?” A: “A 24-month agreement guarantees rate stability.”
+- C: “<span class="lx-highlight" data-idx="23" style="background-color:#EADDFF;">I want to cancel today</span>.” A: “<span class="lx-highlight" data-idx="24" style="background-color:#C4E9E4;">I’ll process it now and prorate the remainder</span>.”
+- C: “<span class="lx-highlight" data-idx="25" style="background-color:#EADDFF;">The product’s not for me</span>.” A: “Understood; <span class="lx-highlight" data-idx="26" style="background-color:#C4E9E4;">may I suggest a lighter plan before you go</span>?”
+- C: “<span class="lx-highlight" data-idx="27" style="background-color:#F9DEDC;">Fees keep adding up</span>.” A: “<span class="lx-highlight" data-idx="28" style="background-color:#FEF0C3;">I can consolidate and cap costs with a fixed-rate bundle</span>.”
+- C: “Your support was fantastic.” A: “Thank you! I’ll pass this to the team and note your feedback.”
+- C: “Docs are confusing.” A: “I’ll rewrite the page with examples and video clips.”
+- C: “The UI feels cluttered.” A: “We’re testing a simplified layout; want early access?”
+- - C: “Is this item in stock?” A: “Yes, 27 units; I’ve reserved two for your cart.”
+- C: “Preorder ETA?” A: “<span class="lx-highlight" data-idx="29" style="background-color:#C8E6C9;">Batch arrives on the 18th; shipping starts the 19th</span>.”
+- C: “Can you bundle items?” A: “Created a bundle SKU with combined discount.”
+- 
+- C: “Can I talk to a supervisor?” A: “I’ve looped in a manager who’ll join shortly.”
+- C: “I need a statement for insurance.” A: “Sent a signed PDF with serial numbers and dates.”
+- C: “Do you integrate with Zapier?” A: “Yes—triggers for new orders and refunds are supported.”
+
+
+
+
+      </div>
+      <div class="lx-controls">
+        <div class="lx-button-row">
+          <button class="lx-control-btn" onclick="playPause()">▶️ Play</button>
+          <button class="lx-control-btn" onclick="prevExtraction()">⏮ Previous</button>
+          <button class="lx-control-btn" onclick="nextExtraction()">⏭ Next</button>
+        </div>
+        <div class="lx-progress-container">
+          <input type="range" id="progressSlider" class="lx-progress-slider"
+                 min="0" max="29" value="0"
+                 onchange="jumpToExtraction(this.value)">
+        </div>
+        <div class="lx-status-text">
+          Entity <span id="entityInfo">1/30</span> |
+          Pos <span id="posInfo">[9-43]</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        const extractions = [{"index": 0, "class": "payment_method_inquiry", "text": "Why was I charged twice this month?", "color": "#F9DEDC", "startPos": 9, "endPos": 43, "beforeText": "  \n- C: \u201c", "extractionText": "Why was I charged twice this month", "afterText": "?\u201d A: \u201cI see two pending authorizations; one will drop off within 24\u201348 hours.\u201d\n- C: \u201cMy promo code didn\u2019t apply.\u201d A: \u201cIt expired yesterday, but I can", "attributesHtml": "<div><strong>class:</strong> payment_method_inquiry</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Billing-Payment</span>}</div>"}, {"index": 1, "class": "payment_instructions", "text": "I see two pending authorizations; one will drop off within 24\u201348 hours.", "color": "#FEF0C3", "startPos": 50, "endPos": 120, "beforeText": "  \n- C: \u201cWhy was I charged twice this month?\u201d A: \u201c", "extractionText": "I see two pending authorizations; one will drop off within 24\u201348 hours", "afterText": ".\u201d\n- C: \u201cMy promo code didn\u2019t apply.\u201d A: \u201cIt expired yesterday, but I can honor a one-time adjustment now.\u201d\n- C: \u201cThis foreign transaction fee surpris", "attributesHtml": "<div><strong>class:</strong> payment_instructions</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Billing-Payment</span>}</div>"}, {"index": 2, "class": "payment_method_inquiry", "text": "My promo code didn\u2019t apply.", "color": "#F9DEDC", "startPos": 129, "endPos": 155, "beforeText": "  \n- C: \u201cWhy was I charged twice this month?\u201d A: \u201cI see two pending authorizations; one will drop off within 24\u201348 hours.\u201d\n- C: \u201c", "extractionText": "My promo code didn\u2019t apply", "afterText": ".\u201d A: \u201cIt expired yesterday, but I can honor a one-time adjustment now.\u201d\n- C: \u201cThis foreign transaction fee surprised me.\u201d A: \u201cIt\u2019s your bank\u2019s fee; I", "attributesHtml": "<div><strong>class:</strong> payment_method_inquiry</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Sales-Pricing-Plans</span>}</div>"}, {"index": 3, "class": "payment_instructions", "text": "It expired yesterday, but I can honor a one-time adjustment now.", "color": "#FEF0C3", "startPos": 162, "endPos": 225, "beforeText": " was I charged twice this month?\u201d A: \u201cI see two pending authorizations; one will drop off within 24\u201348 hours.\u201d\n- C: \u201cMy promo code didn\u2019t apply.\u201d A: \u201c", "extractionText": "It expired yesterday, but I can honor a one-time adjustment now", "afterText": ".\u201d\n- C: \u201cThis foreign transaction fee surprised me.\u201d A: \u201cIt\u2019s your bank\u2019s fee; I\u2019ll send documentation to request a waiver.\u201d\n- C: \u201cTracking hasn\u2019t upd", "attributesHtml": "<div><strong>class:</strong> payment_instructions</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Sales-Pricing-Plans</span>}</div>"}, {"index": 4, "class": "payment_method_inquiry", "text": "This foreign transaction fee surprised me.", "color": "#F9DEDC", "startPos": 234, "endPos": 275, "beforeText": "one will drop off within 24\u201348 hours.\u201d\n- C: \u201cMy promo code didn\u2019t apply.\u201d A: \u201cIt expired yesterday, but I can honor a one-time adjustment now.\u201d\n- C: \u201c", "extractionText": "This foreign transaction fee surprised me", "afterText": ".\u201d A: \u201cIt\u2019s your bank\u2019s fee; I\u2019ll send documentation to request a waiver.\u201d\n- C: \u201cTracking hasn\u2019t updated in three days.\u201d A: \u201cCarrier reports weather d", "attributesHtml": "<div><strong>class:</strong> payment_method_inquiry</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Billing-Payment</span>}</div>"}, {"index": 5, "class": "payment_instructions", "text": "It\u2019s your bank\u2019s fee; I\u2019ll send documentation to request a waiver.", "color": "#FEF0C3", "startPos": 282, "endPos": 347, "beforeText": "promo code didn\u2019t apply.\u201d A: \u201cIt expired yesterday, but I can honor a one-time adjustment now.\u201d\n- C: \u201cThis foreign transaction fee surprised me.\u201d A: \u201c", "extractionText": "It\u2019s your bank\u2019s fee; I\u2019ll send documentation to request a waiver", "afterText": ".\u201d\n- C: \u201cTracking hasn\u2019t updated in three days.\u201d A: \u201cCarrier reports weather delays; arrival now expected Friday.\u201d\n- C: \u201cPackage shows delivered, but ", "attributesHtml": "<div><strong>class:</strong> payment_instructions</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Billing-Payment</span>}</div>"}, {"index": 6, "class": "shipping_issue", "text": "Tracking hasn\u2019t updated in three days.", "color": "#FCE4EC", "startPos": 356, "endPos": 393, "beforeText": "time adjustment now.\u201d\n- C: \u201cThis foreign transaction fee surprised me.\u201d A: \u201cIt\u2019s your bank\u2019s fee; I\u2019ll send documentation to request a waiver.\u201d\n- C: \u201c", "extractionText": "Tracking hasn\u2019t updated in three days", "afterText": ".\u201d A: \u201cCarrier reports weather delays; arrival now expected Friday.\u201d\n- C: \u201cPackage shows delivered, but I don\u2019t have it.\u201d A: \u201cIt was left at Building ", "attributesHtml": "<div><strong>class:</strong> shipping_issue</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Shipping-Delivery</span>}</div>"}, {"index": 7, "class": "delay_reason", "text": "Carrier reports weather delays", "color": "#D2E3FC", "startPos": 400, "endPos": 430, "beforeText": "nsaction fee surprised me.\u201d A: \u201cIt\u2019s your bank\u2019s fee; I\u2019ll send documentation to request a waiver.\u201d\n- C: \u201cTracking hasn\u2019t updated in three days.\u201d A: \u201c", "extractionText": "Carrier reports weather delays", "afterText": "; arrival now expected Friday.\u201d\n- C: \u201cPackage shows delivered, but I don\u2019t have it.\u201d A: \u201cIt was left at Building B mailroom; I\u2019ll share the photo.\u201d\n- ", "attributesHtml": "<div><strong>class:</strong> delay_reason</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Shipping-Delivery</span>}</div>"}, {"index": 8, "class": "expected_arrival", "text": "arrival now expected Friday.", "color": "#C8E6C9", "startPos": 432, "endPos": 459, "beforeText": "It\u2019s your bank\u2019s fee; I\u2019ll send documentation to request a waiver.\u201d\n- C: \u201cTracking hasn\u2019t updated in three days.\u201d A: \u201cCarrier reports weather delays; ", "extractionText": "arrival now expected Friday", "afterText": ".\u201d\n- C: \u201cPackage shows delivered, but I don\u2019t have it.\u201d A: \u201cIt was left at Building B mailroom; I\u2019ll share the photo.\u201d\n- C: \u201cCan you reroute to my off", "attributesHtml": "<div><strong>class:</strong> expected_arrival</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Shipping-Delivery</span>}</div>"}, {"index": 9, "class": "shipping_issue", "text": "Package shows delivered, but I don\u2019t have it.", "color": "#FCE4EC", "startPos": 468, "endPos": 512, "beforeText": "mentation to request a waiver.\u201d\n- C: \u201cTracking hasn\u2019t updated in three days.\u201d A: \u201cCarrier reports weather delays; arrival now expected Friday.\u201d\n- C: \u201c", "extractionText": "Package shows delivered, but I don\u2019t have it", "afterText": ".\u201d A: \u201cIt was left at Building B mailroom; I\u2019ll share the photo.\u201d\n- C: \u201cCan you reroute to my office?\u201d A: \u201cI submitted a hold-and-pickup request at yo", "attributesHtml": "<div><strong>class:</strong> shipping_issue</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Shipping-Delivery</span>}</div>"}, {"index": 10, "class": "shipping_issue", "text": "Can you reroute to my office?", "color": "#FCE4EC", "startPos": 584, "endPos": 612, "beforeText": "rival now expected Friday.\u201d\n- C: \u201cPackage shows delivered, but I don\u2019t have it.\u201d A: \u201cIt was left at Building B mailroom; I\u2019ll share the photo.\u201d\n- C: \u201c", "extractionText": "Can you reroute to my office", "afterText": "?\u201d A: \u201cI submitted a hold-and-pickup request at your nearest hub.\u201d\n\n- C: \u201cHow do I return without the original box?\u201d A: \u201cUse our reusable mailer; I\u2019ll", "attributesHtml": "<div><strong>class:</strong> shipping_issue</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Shipping-Delivery</span>}</div>"}, {"index": 11, "class": "return_solution", "text": "I submitted a hold-and-pickup request at your nearest hub.", "color": "#C4E9E4", "startPos": 619, "endPos": 676, "beforeText": "ackage shows delivered, but I don\u2019t have it.\u201d A: \u201cIt was left at Building B mailroom; I\u2019ll share the photo.\u201d\n- C: \u201cCan you reroute to my office?\u201d A: \u201c", "extractionText": "I submitted a hold-and-pickup request at your nearest hub", "afterText": ".\u201d\n\n- C: \u201cHow do I return without the original box?\u201d A: \u201cUse our reusable mailer; I\u2019ll email a QR code.\u201d\n- C: \u201cRefund\u2019s taking too long.\u201d A: \u201cIt\u2019s pro", "attributesHtml": "<div><strong>class:</strong> return_solution</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Shipping-Delivery</span>}</div>"}, {"index": 12, "class": "return_request", "text": "How do I return without the original box?", "color": "#EADDFF", "startPos": 686, "endPos": 726, "beforeText": "ilding B mailroom; I\u2019ll share the photo.\u201d\n- C: \u201cCan you reroute to my office?\u201d A: \u201cI submitted a hold-and-pickup request at your nearest hub.\u201d\n\n- C: \u201c", "extractionText": "How do I return without the original box", "afterText": "?\u201d A: \u201cUse our reusable mailer; I\u2019ll email a QR code.\u201d\n- C: \u201cRefund\u2019s taking too long.\u201d A: \u201cIt\u2019s processed on our end; banks take 5\u201310 business days.\u201d", "attributesHtml": "<div><strong>class:</strong> return_request</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Returns-Refunds</span>}</div>"}, {"index": 13, "class": "return_solution", "text": "Use our reusable mailer; I\u2019ll email a QR code.", "color": "#C4E9E4", "startPos": 733, "endPos": 778, "beforeText": "\u201cCan you reroute to my office?\u201d A: \u201cI submitted a hold-and-pickup request at your nearest hub.\u201d\n\n- C: \u201cHow do I return without the original box?\u201d A: \u201c", "extractionText": "Use our reusable mailer; I\u2019ll email a QR code", "afterText": ".\u201d\n- C: \u201cRefund\u2019s taking too long.\u201d A: \u201cIt\u2019s processed on our end; banks take 5\u201310 business days.\u201d\n- C: \u201cI received the wrong size.\u201d A: \u201cExchange crea", "attributesHtml": "<div><strong>class:</strong> return_solution</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Returns-Refunds</span>}</div>"}, {"index": 14, "class": "return_request", "text": "Refund\u2019s taking too long.", "color": "#EADDFF", "startPos": 787, "endPos": 811, "beforeText": "-and-pickup request at your nearest hub.\u201d\n\n- C: \u201cHow do I return without the original box?\u201d A: \u201cUse our reusable mailer; I\u2019ll email a QR code.\u201d\n- C: \u201c", "extractionText": "Refund\u2019s taking too long", "afterText": ".\u201d A: \u201cIt\u2019s processed on our end; banks take 5\u201310 business days.\u201d\n- C: \u201cI received the wrong size.\u201d A: \u201cExchange created; keep the original until the ", "attributesHtml": "<div><strong>class:</strong> return_request</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Returns-Refunds</span>}</div>"}, {"index": 15, "class": "delay_reason", "text": "It\u2019s processed on our end; banks take 5\u201310 business days.", "color": "#D2E3FC", "startPos": 818, "endPos": 874, "beforeText": "rest hub.\u201d\n\n- C: \u201cHow do I return without the original box?\u201d A: \u201cUse our reusable mailer; I\u2019ll email a QR code.\u201d\n- C: \u201cRefund\u2019s taking too long.\u201d A: \u201c", "extractionText": "It\u2019s processed on our end; banks take 5\u201310 business days", "afterText": ".\u201d\n- C: \u201cI received the wrong size.\u201d A: \u201cExchange created; keep the original until the replacement arrives.\u201d\n- C: \u201cThe app keeps freezing.\u201d A: \u201cUpdate", "attributesHtml": "<div><strong>class:</strong> delay_reason</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Returns-Refunds</span>}</div>"}, {"index": 16, "class": "product_condition", "text": "I received the wrong size.", "color": "#FFDDBE", "startPos": 883, "endPos": 908, "beforeText": "Use our reusable mailer; I\u2019ll email a QR code.\u201d\n- C: \u201cRefund\u2019s taking too long.\u201d A: \u201cIt\u2019s processed on our end; banks take 5\u201310 business days.\u201d\n- C: \u201c", "extractionText": "I received the wrong size", "afterText": ".\u201d A: \u201cExchange created; keep the original until the replacement arrives.\u201d\n- C: \u201cThe app keeps freezing.\u201d A: \u201cUpdate to v4.2.1; it fixes the memory le", "attributesHtml": "<div><strong>class:</strong> product_condition</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Returns-Refunds</span>}</div>"}, {"index": 17, "class": "return_solution", "text": "Exchange created; keep the original until the replacement arrives.", "color": "#C4E9E4", "startPos": 915, "endPos": 980, "beforeText": "ail a QR code.\u201d\n- C: \u201cRefund\u2019s taking too long.\u201d A: \u201cIt\u2019s processed on our end; banks take 5\u201310 business days.\u201d\n- C: \u201cI received the wrong size.\u201d A: \u201c", "extractionText": "Exchange created; keep the original until the replacement arrives", "afterText": ".\u201d\n- C: \u201cThe app keeps freezing.\u201d A: \u201cUpdate to v4.2.1; it fixes the memory leak causing freezes.\u201d\n- C: \u201cMy device won\u2019t charge.\u201d A: \u201cTry a 30-second ", "attributesHtml": "<div><strong>class:</strong> return_solution</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Returns-Refunds</span>}</div>"}, {"index": 18, "class": "product_condition", "text": "The app keeps freezing.", "color": "#FFDDBE", "startPos": 989, "endPos": 1011, "beforeText": " end; banks take 5\u201310 business days.\u201d\n- C: \u201cI received the wrong size.\u201d A: \u201cExchange created; keep the original until the replacement arrives.\u201d\n- C: \u201c", "extractionText": "The app keeps freezing", "afterText": ".\u201d A: \u201cUpdate to v4.2.1; it fixes the memory leak causing freezes.\u201d\n- C: \u201cMy device won\u2019t charge.\u201d A: \u201cTry a 30-second power reset and a different USB", "attributesHtml": "<div><strong>class:</strong> product_condition</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Product-Issues-Troubleshooting</span>}</div>"}, {"index": 19, "class": "product_condition", "text": "My device won\u2019t charge.", "color": "#FFDDBE", "startPos": 1085, "endPos": 1107, "beforeText": "ep the original until the replacement arrives.\u201d\n- C: \u201cThe app keeps freezing.\u201d A: \u201cUpdate to v4.2.1; it fixes the memory leak causing freezes.\u201d\n- C: \u201c", "extractionText": "My device won\u2019t charge", "afterText": ".\u201d A: \u201cTry a 30-second power reset and a different USB-C cable.\u201d\n- C: \u201cAudio is distorted on calls.\u201d A: \u201cDisable noise suppression once; if resolved, ", "attributesHtml": "<div><strong>class:</strong> product_condition</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Product-Issues-Troubleshooting</span>}</div>"}, {"index": 20, "class": "return_solution", "text": "Try a 30-second power reset and a different USB-C cable.", "color": "#C4E9E4", "startPos": 1114, "endPos": 1169, "beforeText": "lacement arrives.\u201d\n- C: \u201cThe app keeps freezing.\u201d A: \u201cUpdate to v4.2.1; it fixes the memory leak causing freezes.\u201d\n- C: \u201cMy device won\u2019t charge.\u201d A: \u201c", "extractionText": "Try a 30-second power reset and a different USB-C cable", "afterText": ".\u201d\n- C: \u201cAudio is distorted on calls.\u201d A: \u201cDisable noise suppression once; if resolved, update your drivers.\u201d\n- C: \u201cI\u2019m locked out after two-factor.\u201d ", "attributesHtml": "<div><strong>class:</strong> return_solution</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Product-Issues-Troubleshooting</span>}</div>"}, {"index": 21, "class": "product_condition", "text": "Audio is distorted on calls.", "color": "#FFDDBE", "startPos": 1178, "endPos": 1205, "beforeText": "v4.2.1; it fixes the memory leak causing freezes.\u201d\n- C: \u201cMy device won\u2019t charge.\u201d A: \u201cTry a 30-second power reset and a different USB-C cable.\u201d\n- C: \u201c", "extractionText": "Audio is distorted on calls", "afterText": ".\u201d A: \u201cDisable noise suppression once; if resolved, update your drivers.\u201d\n- C: \u201cI\u2019m locked out after two-factor.\u201d A: \u201cI\u2019ll verify identity and reset y", "attributesHtml": "<div><strong>class:</strong> product_condition</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Product-Issues-Troubleshooting</span>}</div>"}, {"index": 22, "class": "return_solution", "text": "Disable noise suppression once; if resolved, update your drivers.", "color": "#C4E9E4", "startPos": 1212, "endPos": 1276, "beforeText": "ausing freezes.\u201d\n- C: \u201cMy device won\u2019t charge.\u201d A: \u201cTry a 30-second power reset and a different USB-C cable.\u201d\n- C: \u201cAudio is distorted on calls.\u201d A: \u201c", "extractionText": "Disable noise suppression once; if resolved, update your drivers", "afterText": ".\u201d\n- C: \u201cI\u2019m locked out after two-factor.\u201d A: \u201cI\u2019ll verify identity and reset your authenticator seeds.\u201d\n- C: \u201cSuspicious login alert?\u201d A: \u201cWe blocked", "attributesHtml": "<div><strong>class:</strong> return_solution</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Product-Issues-Troubleshooting</span>}</div>"}, {"index": 23, "class": "return_request", "text": "I want to cancel today.", "color": "#EADDFF", "startPos": 1856, "endPos": 1878, "beforeText": " A: \u201cYes, 30% off with your verification letter.\u201d\n- C: \u201cCan I lock pricing for two years?\u201d A: \u201cA 24-month agreement guarantees rate stability.\u201d\n- C: \u201c", "extractionText": "I want to cancel today", "afterText": ".\u201d A: \u201cI\u2019ll process it now and prorate the remainder.\u201d\n- C: \u201cThe product\u2019s not for me.\u201d A: \u201cUnderstood; may I suggest a lighter plan before you go?\u201d\n-", "attributesHtml": "<div><strong>class:</strong> return_request</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Cancellations-Retention</span>}</div>"}, {"index": 24, "class": "return_solution", "text": "I\u2019ll process it now and prorate the remainder.", "color": "#C4E9E4", "startPos": 1885, "endPos": 1930, "beforeText": "erification letter.\u201d\n- C: \u201cCan I lock pricing for two years?\u201d A: \u201cA 24-month agreement guarantees rate stability.\u201d\n- C: \u201cI want to cancel today.\u201d A: \u201c", "extractionText": "I\u2019ll process it now and prorate the remainder", "afterText": ".\u201d\n- C: \u201cThe product\u2019s not for me.\u201d A: \u201cUnderstood; may I suggest a lighter plan before you go?\u201d\n- C: \u201cFees keep adding up.\u201d A: \u201cI can consolidate and", "attributesHtml": "<div><strong>class:</strong> return_solution</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Cancellations-Retention</span>}</div>"}, {"index": 25, "class": "return_request", "text": "The product\u2019s not for me.", "color": "#EADDFF", "startPos": 1939, "endPos": 1963, "beforeText": "years?\u201d A: \u201cA 24-month agreement guarantees rate stability.\u201d\n- C: \u201cI want to cancel today.\u201d A: \u201cI\u2019ll process it now and prorate the remainder.\u201d\n- C: \u201c", "extractionText": "The product\u2019s not for me", "afterText": ".\u201d A: \u201cUnderstood; may I suggest a lighter plan before you go?\u201d\n- C: \u201cFees keep adding up.\u201d A: \u201cI can consolidate and cap costs with a fixed-rate bund", "attributesHtml": "<div><strong>class:</strong> return_request</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Cancellations-Retention</span>}</div>"}, {"index": 26, "class": "return_solution", "text": "may I suggest a lighter plan before you go?", "color": "#C4E9E4", "startPos": 1982, "endPos": 2024, "beforeText": " rate stability.\u201d\n- C: \u201cI want to cancel today.\u201d A: \u201cI\u2019ll process it now and prorate the remainder.\u201d\n- C: \u201cThe product\u2019s not for me.\u201d A: \u201cUnderstood; ", "extractionText": "may I suggest a lighter plan before you go", "afterText": "?\u201d\n- C: \u201cFees keep adding up.\u201d A: \u201cI can consolidate and cap costs with a fixed-rate bundle.\u201d\n- C: \u201cYour support was fantastic.\u201d A: \u201cThank you! I\u2019ll p", "attributesHtml": "<div><strong>class:</strong> return_solution</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Cancellations-Retention</span>}</div>"}, {"index": 27, "class": "payment_method_inquiry", "text": "Fees keep adding up.", "color": "#F9DEDC", "startPos": 2033, "endPos": 2052, "beforeText": " \u201cI\u2019ll process it now and prorate the remainder.\u201d\n- C: \u201cThe product\u2019s not for me.\u201d A: \u201cUnderstood; may I suggest a lighter plan before you go?\u201d\n- C: \u201c", "extractionText": "Fees keep adding up", "afterText": ".\u201d A: \u201cI can consolidate and cap costs with a fixed-rate bundle.\u201d\n- C: \u201cYour support was fantastic.\u201d A: \u201cThank you! I\u2019ll pass this to the team and not", "attributesHtml": "<div><strong>class:</strong> payment_method_inquiry</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Billing-Payment</span>}</div>"}, {"index": 28, "class": "payment_instructions", "text": "I can consolidate and cap costs with a fixed-rate bundle.", "color": "#FEF0C3", "startPos": 2059, "endPos": 2115, "beforeText": "prorate the remainder.\u201d\n- C: \u201cThe product\u2019s not for me.\u201d A: \u201cUnderstood; may I suggest a lighter plan before you go?\u201d\n- C: \u201cFees keep adding up.\u201d A: \u201c", "extractionText": "I can consolidate and cap costs with a fixed-rate bundle", "afterText": ".\u201d\n- C: \u201cYour support was fantastic.\u201d A: \u201cThank you! I\u2019ll pass this to the team and note your feedback.\u201d\n- C: \u201cDocs are confusing.\u201d A: \u201cI\u2019ll rewrite t", "attributesHtml": "<div><strong>class:</strong> payment_instructions</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Billing-Payment</span>}</div>"}, {"index": 29, "class": "expected_arrival", "text": "Batch arrives on the 18th; shipping starts the 19th", "color": "#C8E6C9", "startPos": 2505, "endPos": 2556, "beforeText": " simplified layout; want early access?\u201d\n- - C: \u201cIs this item in stock?\u201d A: \u201cYes, 27 units; I\u2019ve reserved two for your cart.\u201d\n- C: \u201cPreorder ETA?\u201d A: \u201c", "extractionText": "Batch arrives on the 18th; shipping starts the 19th", "afterText": ".\u201d\n- C: \u201cCan you bundle items?\u201d A: \u201cCreated a bundle SKU with combined discount.\u201d\n- \n- C: \u201cCan I talk to a supervisor?\u201d A: \u201cI\u2019ve looped in a manager w", "attributesHtml": "<div><strong>class:</strong> expected_arrival</div><div><strong>attributes:</strong> {<span class=\"lx-attr-key\">product_group</span>: <span class=\"lx-attr-value\">Orders-Inventory-Fulfillment</span>}</div>"}];
+        let currentIndex = 0;
+        let isPlaying = false;
+        let animationInterval = null;
+        let animationSpeed = 1.0;
+
+        function updateDisplay() {
+          const extraction = extractions[currentIndex];
+          if (!extraction) return;
+
+          document.getElementById('attributesContainer').innerHTML = extraction.attributesHtml;
+          document.getElementById('entityInfo').textContent = (currentIndex + 1) + '/' + extractions.length;
+          document.getElementById('posInfo').textContent = '[' + extraction.startPos + '-' + extraction.endPos + ']';
+          document.getElementById('progressSlider').value = currentIndex;
+
+          const playBtn = document.querySelector('.lx-control-btn');
+          if (playBtn) playBtn.textContent = isPlaying ? '⏸ Pause' : '▶️ Play';
+
+          const prevHighlight = document.querySelector('.lx-text-window .lx-current-highlight');
+          if (prevHighlight) prevHighlight.classList.remove('lx-current-highlight');
+          const currentSpan = document.querySelector('.lx-text-window span[data-idx="' + currentIndex + '"]');
+          if (currentSpan) {
+            currentSpan.classList.add('lx-current-highlight');
+            currentSpan.scrollIntoView({block: 'center', behavior: 'smooth'});
+          }
+        }
+
+        function nextExtraction() {
+          currentIndex = (currentIndex + 1) % extractions.length;
+          updateDisplay();
+        }
+
+        function prevExtraction() {
+          currentIndex = (currentIndex - 1 + extractions.length) % extractions.length;
+          updateDisplay();
+        }
+
+        function jumpToExtraction(index) {
+          currentIndex = parseInt(index);
+          updateDisplay();
+        }
+
+        function playPause() {
+          if (isPlaying) {
+            clearInterval(animationInterval);
+            isPlaying = false;
+          } else {
+            animationInterval = setInterval(nextExtraction, animationSpeed * 1000);
+            isPlaying = true;
+          }
+          updateDisplay();
+        }
+
+        window.playPause = playPause;
+        window.nextExtraction = nextExtraction;
+        window.prevExtraction = prevExtraction;
+        window.jumpToExtraction = jumpToExtraction;
+
+        updateDisplay();
+      })();
+    </script>
